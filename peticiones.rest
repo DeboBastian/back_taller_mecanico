@@ -1,0 +1,28 @@
+
+@host = http://localhost:3000
+
+@apiUsers = /api/users
+
+
+### API DE USUARIOS (ADMIN Y MECHANIC)
+
+###
+GET {{host}}{{apiUsers}}
+
+
+
+###
+POST {{host}}{{apiUsers}}/login/register
+Content-Type: application/json
+
+{
+    "name": "Deborah2",
+    "surname": "Bastian",
+    "birthdate": "1996-10-22",
+    "dni": "86431223-T2",
+    "phone": "669183262",
+    "email": "deb@gmail.comm",
+    "username": "debobastian",
+    "password": "12345",
+    "role": "admin"
+}
