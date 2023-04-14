@@ -1,35 +1,45 @@
 
 @host = http://localhost:3000
 
-@apiUsers = /api/users
+@urlUsers = /api/users
 
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 
 ### GET ALL
-GET {{host}}{{apiUsers}}
+GET {{host}}{{urlUsers}}
 
 
 ### GET BY ID
-GET {{host}}{{apiUsers}}/1
+GET {{host}}{{urlUsers}}/1
 
 
 ### GET BY EMAIL
-GET {{host}}{{apiUsers}}/email/deb@gmail.com
+GET {{host}}{{urlUsers}}/email/deb@gmail.com
 
 
 ### NEW USER
-POST {{host}}{{apiUsers}}/register
+POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Test",
-    "surname": "Test",
+    "name": "Test4",
+    "surname": "Test4",
     "birthdate": "1996-10-22",
-    "dni": "TEST",
-    "phone": "TEST",
-    "email": "TEST",
-    "username": "TEST",
+    "dni": "TEST4",
+    "phone": "TEST4",
+    "email": "TEST4",
+    "username": "TEST2",
     "password": "12345",
     "role": "admin"
+}
+
+
+### LOGIN USER
+POST {{host}}{{urlUsers}}/login
+Content-Type: application/json
+
+{
+    "dni": "TEST4",
+    "password": "12345"
 }
