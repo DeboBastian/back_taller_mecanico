@@ -6,23 +6,30 @@
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 
-###
+### GET ALL
 GET {{host}}{{apiUsers}}
 
 
+### GET BY ID
+GET {{host}}{{apiUsers}}/1
 
-###
-POST {{host}}{{apiUsers}}/login/register
+
+### GET BY EMAIL
+GET {{host}}{{apiUsers}}/email/deb@gmail.com
+
+
+### NEW USER
+POST {{host}}{{apiUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Deborah2",
-    "surname": "Bastian",
+    "name": "Test",
+    "surname": "Test",
     "birthdate": "1996-10-22",
-    "dni": "86431223-T2",
-    "phone": "669183262",
-    "email": "deb@gmail.comm",
-    "username": "debobastian",
+    "dni": "TEST",
+    "phone": "TEST",
+    "email": "TEST",
+    "username": "TEST",
     "password": "12345",
     "role": "admin"
 }

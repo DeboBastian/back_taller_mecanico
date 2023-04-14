@@ -7,4 +7,20 @@ const create = ({ name, surname, birthdate, dni, phone, email, username, passwor
 
 }
 
-module.exports = { create }
+const getAll = () => {
+    return db.query('select * from users')
+}
+
+
+const getById = (userId) => {
+    return db.query('select * from users where id = ?', [userId])
+}
+
+
+const getByEmail = (email) => {
+    return db.query('select * from users where email = ?', [email])
+}
+
+
+
+module.exports = { create, getAll, getById, getByEmail }
