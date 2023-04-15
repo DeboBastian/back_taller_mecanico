@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-const { create, getById, getAll } = require('../../models/clients.model')
+const { create, getById, getAll, deleteById } = require('../../models/clients.model')
 
 
 router.post('/register', async (req, res) => {
@@ -25,4 +25,29 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+
+router.get('/:clientId', async (req, res) => {
+    const { clientId } = req.params;
+    try {
+        const [client] = await getById(clientId)
+        res.json(client[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+})
+
+
+
+router.delete('/:clientId', async (req, res) => {
+    const { clientId } = req.params
+
+    try {
+        const [client] = await getById(clientId)
+        const [result] = await deleteById(clientId)
+        res.json(client[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+});
 module.exports = router;
