@@ -2,7 +2,7 @@
 @host = http://localhost:3000
 
 @urlUsers = /api/users
-
+@urlClients = /api/clients
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 
@@ -16,6 +16,10 @@ GET {{host}}{{urlUsers}}/1
 
 ### GET BY EMAIL
 GET {{host}}{{urlUsers}}/email/deb@gmail.com
+
+
+### DELETE USER BY ID
+DELETE {{host}}{{urlUsers}}/
 
 
 ### NEW USER
@@ -43,3 +47,16 @@ Content-Type: application/json
     "dni": "TEST4",
     "password": "12345"
 }
+
+
+###################################################
+
+
+### API DE CLIENTES
+
+### NEW CLIENT
+POST {{host}}{{urlClients}}/register
+Content-Type: application/json
+
+{ "name": "Eli"
+surname, email, phone, dni, address}
