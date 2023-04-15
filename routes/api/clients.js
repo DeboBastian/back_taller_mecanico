@@ -1,10 +1,10 @@
 
 const router = require('express').Router();
 
-const { create } = require('../../models/clients.model')
+const { create, getById } = require('../../models/clients.model')
 
 
-router.post('/clients/register', async (req, res) => {
+router.post('/register', async (req, res) => {
 
     try {
         const [newClient] = await create(req.body);
@@ -14,3 +14,6 @@ router.post('/clients/register', async (req, res) => {
         res.json({ fatal: error.message })
     }
 })
+
+
+module.exports = router;

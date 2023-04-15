@@ -27,13 +27,13 @@ POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Test4",
-    "surname": "Test4",
+    "name": "Test5",
+    "surname": "Test5",
     "birthdate": "1996-10-22",
-    "dni": "TEST4",
-    "phone": "TEST4",
-    "email": "TEST4",
-    "username": "TEST2",
+    "dni": "TEST5",
+    "phone": "TEST5",
+    "email": "TEST5",
+    "username": "TEST5",
     "password": "12345",
     "role": "admin"
 }
@@ -58,5 +58,11 @@ Content-Type: application/json
 POST {{host}}{{urlClients}}/register
 Content-Type: application/json
 
-{ "name": "Eli"
-surname, email, phone, dni, address}
+{
+    "name": "Eli3",
+    "surname": "Bas3",
+    "email":"dew23",
+    "phone": "9281323",
+    "dni": "03298723",
+    "address": "ñjewa"
+}
