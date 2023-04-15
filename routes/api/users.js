@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const encript = require('bcryptjs')
 
-const { create, getAll, getById, getByEmail, getByDNI } = require('../../models/users.model')
+const { create, getById, getByEmail, getByDNI } = require('../../models/users.model')
 const { createToken } = require('../../helpers/utils');
 const { checkToken } = require('../../helpers/middlewares');
 
@@ -44,16 +44,6 @@ router.post('/login', async (req, res) => {
         res.json({ fatal: error.message })
     }
 })
-
-
-router.get('/', async (req, res) => {
-    try {
-        const [users] = await getAll();
-        res.json(users);
-    } catch (error) {
-        res.json({ fatal: error.message })
-    }
-});
 
 
 router.get('/:userId', checkToken, async (req, res) => {

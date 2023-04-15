@@ -6,9 +6,6 @@
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 
-### GET ALL
-GET {{host}}{{urlUsers}}
-
 
 ### GET BY ID
 GET {{host}}{{urlUsers}}/1
@@ -59,10 +56,13 @@ POST {{host}}{{urlClients}}/register
 Content-Type: application/json
 
 {
-    "name": "Eli3",
-    "surname": "Bas3",
-    "email":"dew23",
-    "phone": "9281323",
-    "dni": "03298723",
+    "name": "DEB",
+    "surname": "DEB",
+    "email":"DEB",
+    "phone": "92813233",
+    "dni": "032987233",
     "address": "ñjewa"
 }
+
+### GET ALL
+GET {{host}}{{urlClients}}
