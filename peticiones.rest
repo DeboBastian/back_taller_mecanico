@@ -5,18 +5,29 @@
 @urlClients = /api/clients
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
-
+//Cuando hacemos login vamos a la interfaz de admin o clientes segun el login que hagamos, en users creo que solo habria que sacar cada user por id, mail, dni. Borrar por id. 
 
 ### GET BY ID
-GET {{host}}{{urlUsers}}/1
+GET {{host}}{{urlUsers}}/16
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
+
+### GET BY DNI
+GET {{host}}{{urlUsers}}/dni/TEST55
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
 ### GET BY EMAIL
-GET {{host}}{{urlUsers}}/email/deb@gmail.com
+GET {{host}}{{urlUsers}}/email/test55
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
+
+
+# ### GET BY DNI OR EMAIL
+# GET {{host}}{{urlUsers}}/mixto/TEST55
 
 
 ### DELETE USER BY ID
-DELETE {{host}}{{urlUsers}}/
+DELETE {{host}}{{urlUsers}}/15
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
 ### NEW USER
@@ -27,9 +38,9 @@ Content-Type: application/json
     "name": "Test5",
     "surname": "Test5",
     "birthdate": "1996-10-22",
-    "dni": "TEST5",
-    "phone": "TEST5",
-    "email": "TEST5",
+    "dni": "TEST55",
+    "phone": "TEST55",
+    "email": "TEST55",
     "username": "TEST5",
     "password": "12345",
     "role": "admin"
@@ -41,7 +52,7 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "dni": "TEST4",
+    "dni": "TEST5",
     "password": "12345"
 }
 
@@ -50,19 +61,30 @@ Content-Type: application/json
 
 
 ### API DE CLIENTES
+//Cuando accedemos a los clientes podemos: VER TODOS, VER UNO, CREAR y BORRAR POR ID
+//MODIFICAR??
 
 ### NEW CLIENT
 POST {{host}}{{urlClients}}/register
 Content-Type: application/json
 
 {
-    "name": "DEB",
-    "surname": "DEB",
-    "email":"DEB",
-    "phone": "92813233",
-    "dni": "032987233",
+    "name": "DEB22",
+    "surname": "DEB22",
+    "email":"DEB22",
+    "phone": "9281323322",
+    "dni": "03298723322",
     "address": "ñjewa"
 }
 
 ### GET ALL
 GET {{host}}{{urlClients}}
+
+
+### GET BY ID
+GET {{host}}{{urlClients}}/7
+
+
+### DELETE BY ID
+DELETE {{host}}{{urlClients}}/6
+//FIXME: EMAIL OR DNI EN USERS

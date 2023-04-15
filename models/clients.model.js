@@ -17,9 +17,8 @@ const getById = (clientId) => {
     return db.query('select * from clients where id = ?', [clientId])
 }
 
-
 const deleteById = (id) => {
-    return db.query('delete from taller_mecanico_proyecto where clients.id = ?', [id])
+    return db.query('delete from clients where clients.id = ?', [id])
 }
 
 module.exports = { create, getAll, getById, deleteById }

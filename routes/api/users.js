@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const encript = require('bcryptjs')
 
-const { create, getById, getByEmail, getByDNI } = require('../../models/users.model')
+const { create, getById, getByEmail, getByDni, deleteById, getBydniORemail } = require('../../models/users.model')
 const { createToken } = require('../../helpers/utils');
 const { checkToken } = require('../../helpers/middlewares');
 
@@ -64,7 +64,7 @@ router.get('/:userId', checkToken, async (req, res) => {
 })
 
 
-router.get('/email/:userEmail', async (req, res) => {
+router.get('/email/:userEmail', checkToken, async (req, res) => {
     const { userEmail } = req.params
     try {
         const [result] = await getByEmail(userEmail)
@@ -81,7 +81,54 @@ router.get('/email/:userEmail', async (req, res) => {
 })
 
 
+router.get('/dni/:userDni', checkToken, async (req, res) => {
+    const { userDni } = req.params;
 
-//TODO: DELETE
+    try {
+        const [result] = await getByDni(userDni)
+        if (result.length === 0) {
+            return res.json({ fatal: "User doesn't exist" })
+        }
+
+
+        const [users] = await getByDni(userDni);
+        res.json(users)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+})
+
+
+
+// router.get('/mixto/:emailordni', async (req, res) => {
+//     const { userEmail, userDni } = req.params
+
+//     try {
+//         const [result] = await getBydniORemail(userEmail || userDni)
+//         console.log(result)
+//         if (result.length === 0) {
+//             return res.json({ fatal: "Email doesn't exist" })
+//         }
+
+//         const [users] = await getBydniORemail(userEmail, userDni);
+//         res.json(users)
+//     } catch (error) {
+//         res.json({ fatal: error.message })
+//     }
+// })
+
+
+router.delete('/:userId', checkToken, async (req, res) => {
+    const { userId } = req.params
+
+    try {
+        const [user] = await getById(userId)
+        const [result] = await deleteById(userId)
+        res.json(user[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+});
+
 
 module.exports = router;
