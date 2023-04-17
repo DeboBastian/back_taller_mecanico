@@ -82,11 +82,11 @@ GET {{host}}{{urlClients}}
 
 
 ### GET BY ID
-GET {{host}}{{urlClients}}/7
+GET {{host}}{{urlClients}}/1
 
 
 ### DELETE BY ID
-DELETE {{host}}{{urlClients}}/7
+DELETE {{host}}{{urlClients}}/2
 
 
 //FIXME: EMAIL OR DNI EN USERS

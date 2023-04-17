@@ -22,6 +22,3 @@ const deleteById = (id) => {
 }
 
 module.exports = { create, getAll, getById, deleteById }
-
-
-// FIXME: CAMBIAR TIPO DE DATO ADRESS EN DATABASE, card_number ponerlo autoincremental

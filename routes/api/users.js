@@ -24,16 +24,17 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
 
     try {
-        const [result] = await getByDNI(req.body.dni);
+        // const [result] = await getByDNI(req.body.dni);
+        const [result] = await getByEmail(req.body.email);
         if (result.length === 0) {
-            return res.json({ fatal: 'DNI or password wrong' })
+            return res.json({ fatal: 'Email or password wrong' })
         }
         const user = result[0];
 
 
         const samePassword = encript.compareSync(req.body.password, user.password);
         if (!samePassword) {
-            return res.json({ fatal: 'DNI or password wrong' })
+            return res.json({ fatal: 'Email or password wrong' })
         }
         res.json({
             succes: 'Successful Login',

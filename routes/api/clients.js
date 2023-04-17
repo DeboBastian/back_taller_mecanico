@@ -45,9 +45,12 @@ router.delete('/:clientId', async (req, res) => {
     try {
         const [client] = await getById(clientId)
         const [result] = await deleteById(clientId)
+        console.log(result)
         res.json(client[0])
     } catch (error) {
         res.json({ fatal: error.message });
     }
 });
+
+
 module.exports = router;
