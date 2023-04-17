@@ -3,6 +3,9 @@
 
 @urlUsers = /api/users
 @urlClients = /api/clients
+@urlReparations = api/reparations
+@urlCars = api/cars
+
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 //Cuando hacemos login vamos a la interfaz de admin o clientes segun el login que hagamos, en users creo que solo habria que sacar cada user por id, mail, dni. Borrar por id. 
@@ -12,8 +15,8 @@ GET {{host}}{{urlUsers}}/16
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 ### GET BY DNI
-GET {{host}}{{urlUsers}}/dni/TEST55
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
+GET {{host}}{{urlUsers}}/dni/TEST556
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOSwiZXhwIjoxNjg4NjI0Mjc0LCJpYXQiOjE2ODE3MTIyNzR9.RYSAHldxuHLFYLukClwzGrCOjKzletdMtCE5KzeaeOo
 
 
 ### GET BY EMAIL
@@ -26,7 +29,7 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxN
 
 
 ### DELETE USER BY ID
-DELETE {{host}}{{urlUsers}}/15
+DELETE {{host}}{{urlUsers}}/16
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
@@ -35,13 +38,13 @@ POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Test5",
-    "surname": "Test5",
+    "name": "Test6",
+    "surname": "Test6",
     "birthdate": "1996-10-22",
-    "dni": "TEST55",
-    "phone": "TEST55",
-    "email": "TEST55",
-    "username": "TEST5",
+    "dni": "TEST556",
+    "phone": "TEST556",
+    "email": "TEST556",
+    "username": "TEST56",
     "password": "12345",
     "role": "admin"
 }
@@ -52,7 +55,7 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "dni": "TEST5",
+    "email": "TEST556",
     "password": "12345"
 }
 
@@ -65,16 +68,16 @@ Content-Type: application/json
 //MODIFICAR??
 
 ### NEW CLIENT
-POST {{host}}{{urlClients}}/register
+POST {{host}}{{urlClients}}
 Content-Type: application/json
 
 {
-    "name": "DEB22",
-    "surname": "DEB22",
-    "email":"DEB22",
-    "phone": "9281323322",
-    "dni": "03298723322",
-    "address": "ñjewa"
+    "name": "prueba",
+    "surname": "prueba",
+    "email":"prueba",
+    "phone": "prueba",
+    "dni": "prueba",
+    "address": "pruebba"
 }
 
 ### GET ALL
@@ -82,11 +85,54 @@ GET {{host}}{{urlClients}}
 
 
 ### GET BY ID
-GET {{host}}{{urlClients}}/1
+GET {{host}}{{urlClients}}/8
 
 
 ### DELETE BY ID
-DELETE {{host}}{{urlClients}}/2
+DELETE {{host}}{{urlClients}}/5
 
 
 //FIXME: EMAIL OR DNI EN USERS
+
+
+
+###################################################
+
+
+### API DE REPARACIONES
+
+### POST REPARATION
+POST {{host}}{{urlReparations}}
+Content-Type: application/json
+
+{
+    "status": "in_progress",
+    "type": "mechanic",
+    "reparation":"xxx",
+    "price": "200",
+    "billnumber": "79876"
+}
+
+
+###################################################
+
+
+### API DE COCHES
+
+### POST CAR
+POST {{host}}/{{urlCars}}
+Content-Type: application/json
+
+{  
+    "chasis": "xxx",
+    "registration": "xxx",
+    "brand":"xxx",
+    "model": "xxx",
+    "color": "xxx",
+    "km": 78990,
+    "year": 2018,
+    "doors": 5,
+    "type": "automatic",
+    "fuel": "petrol",
+    "damages": "xxx"
+}

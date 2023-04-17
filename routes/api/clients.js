@@ -4,7 +4,7 @@ const router = require('express').Router();
 const { create, getById, getAll, deleteById } = require('../../models/clients.model')
 
 
-router.post('/register', async (req, res) => {
+router.post('/', async (req, res) => {
 
     try {
         const [newClient] = await create(req.body);
@@ -51,6 +51,5 @@ router.delete('/:clientId', async (req, res) => {
         res.json({ fatal: error.message });
     }
 });
-
 
 module.exports = router;
