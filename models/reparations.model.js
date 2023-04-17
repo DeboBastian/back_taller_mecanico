@@ -1,7 +1,9 @@
-const create = ({ status, type, reparation, price, billnumber }) => {
+const tokengen = require("tokengn")
+
+const create = ({ status, type, reparation, price }) => {
 
     return db.query(
-        'insert into reparations (status, type, reparation, price, billnumber) values (?,?,?,?,?)', [status, type, reparation, price, billnumber]
+        'insert into reparations (status, type, reparation, price, bill_number) values (?,?,?,?,?)', [status, type, reparation, price, tokengen()]
     )
 
 }

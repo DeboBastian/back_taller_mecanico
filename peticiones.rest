@@ -3,8 +3,8 @@
 
 @urlUsers = /api/users
 @urlClients = /api/clients
-@urlReparations = api/reparations
-@urlCars = api/cars
+@urlReparations = /api/reparations
+@urlCars = /api/cars
 
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
@@ -109,8 +109,7 @@ Content-Type: application/json
     "status": "in_progress",
     "type": "mechanic",
     "reparation":"xxx",
-    "price": "200",
-    "billnumber": "79876"
+    "price": "200"
 }
 
 
@@ -120,7 +119,7 @@ Content-Type: application/json
 ### API DE COCHES
 
 ### POST CAR
-POST {{host}}/{{urlCars}}
+POST {{host}}{{urlCars}}
 Content-Type: application/json
 
 {  
