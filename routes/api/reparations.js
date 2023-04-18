@@ -23,4 +23,15 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+
+router.get('/:reparationId', async (req, res) => {
+    const { reparationId } = req.params;
+    try {
+        const [reparation] = await getById(reparationId)
+        res.json(reparation[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+})
 module.exports = router;
