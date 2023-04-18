@@ -8,6 +8,11 @@ const create = ({ name, surname, birthdate, dni, phone, email, username, passwor
 }
 
 
+const getAll = () => {
+    return db.query('select * from users')
+}
+
+
 const getById = (userId) => {
     return db.query('select * from users where id = ?', [userId])
 }
@@ -33,7 +38,7 @@ const deleteById = (id) => {
 }
 
 
-module.exports = { create, getByDni, getById, getByEmail, deleteById, getBydniORemail }
+module.exports = { create, getAll, getByDni, getById, getByEmail, deleteById, getBydniORemail }
 
 
 // TODO:

@@ -1,7 +1,7 @@
-const create = ({ chasis, registration, brand, model, color, km, year, doors, type, fuel, damages }) => {
+const create = ({ chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, clients_id }) => {
 
     return db.query(
-        'insert into cars (chasis, registration, brand, model, color, km, year, doors, type, fuel, damages) values (?,?,?,?,?,?,?,?,?,?,?)', [chasis, registration, brand, model, color, km, year, doors, type, fuel, damages]
+        'insert into cars (chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, clients_id) values (?,?,?,?,?,?,?,?,?,?,?,?)', [chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, clients_id]
     )
 
 }
@@ -11,4 +11,9 @@ const getById = (carId) => {
 }
 
 
-module.exports = { create, getById }
+const getAll = () => {
+    return db.query('select * from cars')
+}
+
+
+module.exports = { create, getById, getAll }

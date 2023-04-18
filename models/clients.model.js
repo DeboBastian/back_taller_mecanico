@@ -1,8 +1,8 @@
 
-const create = ({ name, surname, email, phone, dni, address }) => {
+const create = ({ name, surname, email, phone, dni, address, card_number }) => {
 
     return db.query(
-        'insert into clients (name, surname, email, phone, dni, address) values (?,?,?,?,?,?)', [name, surname, email, phone, dni, address]
+        'insert into clients (name, surname, email, phone, dni, address, card_number) values (?,?,?,?,?,?,?)', [name, surname, email, phone, dni, address, card_number]
     )
 
 }

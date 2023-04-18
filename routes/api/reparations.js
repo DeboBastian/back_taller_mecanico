@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { create, getById } = require('../../models/reparations.model')
+const { create, getById, getAll } = require('../../models/reparations.model')
 
 router.post('/', async (req, res) => {
 
@@ -11,4 +11,16 @@ router.post('/', async (req, res) => {
         res.json({ fatal: error.message })
     }
 })
+
+
+
+router.get('/', async (req, res) => {
+    try {
+        const [reparations] = await getAll();
+        res.json(reparations);
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+});
+
 module.exports = router;

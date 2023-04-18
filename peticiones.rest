@@ -10,6 +10,11 @@
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 //Cuando hacemos login vamos a la interfaz de admin o clientes segun el login que hagamos, en users creo que solo habria que sacar cada user por id, mail, dni. Borrar por id. 
 
+
+### GET ALL USERS
+GET {{host}}{{urlUsers}}
+
+
 ### GET BY ID
 GET {{host}}{{urlUsers}}/16
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
@@ -38,14 +43,14 @@ POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Test6",
-    "surname": "Test6",
-    "birthdate": "1996-10-22",
-    "dni": "TEST556",
-    "phone": "TEST556",
-    "email": "TEST556",
-    "username": "TEST56",
-    "password": "12345",
+    "name": "Test65",
+    "surname": "Test65",
+    "birthdate": "1996-10-21",
+    "dni": "TEST5564",
+    "phone": "TEST5564",
+    "email": "TEST5564",
+    "username": "TEST564",
+    "password": "123454",
     "role": "admin"
 }
 
@@ -72,12 +77,13 @@ POST {{host}}{{urlClients}}
 Content-Type: application/json
 
 {
-    "name": "prueba",
-    "surname": "prueba",
-    "email":"prueba",
-    "phone": "prueba",
-    "dni": "prueba",
-    "address": "pruebba"
+    "name": "Eugenia",
+    "surname": "Contreras",
+    "email":"eu@gmail.com",
+    "phone": "76541813",
+    "dni": "987641096",
+    "address": "Plaza Mayor, 23",
+    "card_number": 6153947
 }
 
 ### GET ALL
@@ -109,8 +115,16 @@ Content-Type: application/json
     "status": "in_progress",
     "type": "mechanic",
     "reparation":"xxx",
-    "price": "200"
+    "price": "200",
+    "users_id": 11,
+    "cars_id": 1
 }
+
+
+
+### GET ALL REPARATIONS
+GET {{host}}{{urlReparations}}
+
 
 
 ###################################################
@@ -123,15 +137,20 @@ POST {{host}}{{urlCars}}
 Content-Type: application/json
 
 {  
-    "chasis": "xxx",
-    "registration": "xxx",
-    "brand":"xxx",
-    "model": "xxx",
-    "color": "xxx",
-    "km": 78990,
-    "year": 2018,
+    "chasis": "432546",
+    "registration": "453635",
+    "brand":"MERCEDES",
+    "model": "S 500",
+    "color": "black",
+    "km": 78975,
+    "year": 2020,
     "doors": 5,
     "type": "automatic",
-    "fuel": "petrol",
-    "damages": "xxx"
+    "fuel": "gasoil",
+    "damages": "Change neumatics",
+    "clients_id": 3
 }
+
+
+### GET ALL CARS
+GET {{host}}{{urlCars}}
