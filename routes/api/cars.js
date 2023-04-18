@@ -26,4 +26,17 @@ router.get('/', async (req, res) => {
 });
 
 
+
+router.get('/:carId', async (req, res) => {
+    const { carId } = req.params;
+    try {
+        const [car] = await getById(carId)
+        res.json(car[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+})
+
+
+
 module.exports = router;

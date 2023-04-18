@@ -154,3 +154,7 @@ Content-Type: application/json
 
 ### GET ALL CARS
 GET {{host}}{{urlCars}}
+
+
+###GET CAR BY ID
+GET {{host}}{{urlCars}}/1
