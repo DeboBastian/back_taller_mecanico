@@ -16,7 +16,7 @@ GET {{host}}{{urlUsers}}
 
 
 ### GET BY ID
-GET {{host}}{{urlUsers}}/16
+GET {{host}}{{urlUsers}}/11
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 ### GET BY DNI
@@ -126,6 +126,8 @@ Content-Type: application/json
 GET {{host}}{{urlReparations}}
 
 
+### GET BY ID
+GET {{host}}{{urlReparations}}/2
 
 ###################################################
 
