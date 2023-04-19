@@ -5,7 +5,7 @@
 @urlClients = /api/clients
 @urlReparations = /api/reparations
 @urlCars = /api/cars
-
+@urlMechanics = /api/mechanics
 
 ### API DE USUARIOS (ADMIN Y MECHANIC)
 //Cuando hacemos login vamos a la interfaz de admin o clientes segun el login que hagamos, en users creo que solo habria que sacar cada user por id, mail, dni. Borrar por id. 
@@ -157,6 +157,18 @@ Content-Type: application/json
 ### GET ALL CARS
 GET {{host}}{{urlCars}}
 
-
 ###GET CAR BY ID
 GET {{host}}{{urlCars}}/1
+
+
+
+##############################################
+
+### GET ALL MECHANICS
+
+### GET ALL
+GET {{host}}{{urlMechanics}}
+
+
+### GET BY ID
+GET {{host}}{{urlMechanics}}/25
