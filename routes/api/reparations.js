@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { create, getById, getAll } = require('../../models/reparations.model')
+const { create, getById, getAll, filterByCar, filterByUser } = require('../../models/reparations.model')
 
 router.post('/', async (req, res) => {
 
@@ -34,4 +34,17 @@ router.get('/:reparationId', async (req, res) => {
         res.json({ fatal: error.message });
     }
 })
+
+
+// GET api/reparations/mechanic/:userid
+router.get('/mechanic/:userid', async (req, res) => {
+    const { userid } = req.params;
+    try {
+        const [reparations] = await filterByUser(userid)
+        res.json(reparations)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+});
+
 module.exports = router;

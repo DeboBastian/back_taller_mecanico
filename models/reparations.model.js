@@ -8,19 +8,22 @@ const create = ({ status, type, reparation, price, users_id, cars_id }) => {
 
 }
 
+const getAll = () => {
+    return db.query('select * from reparations')
+}
+
 
 const getById = (reparationId) => {
     return db.query('select * from reparations where id = ?', [reparationId])
 }
 
 
-const filterByCar = (carId) => {
-    return db.query('SELECT * from reparations WHERE cars_id = ?', [carId])
+const filterByUser = (userId) => {
+    return db.query(`SELECT * FROM reparations r 
+                    JOIN cars c on r.cars_id = c.id
+                    where users_id = ?`, [userId])
 }
 
 
-const getAll = () => {
-    return db.query('select * from reparations')
-}
 
-module.exports = { create, getById, filterByCar, getAll }
+module.exports = { create, getById, filterByUser, getAll }

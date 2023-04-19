@@ -1,4 +1,4 @@
-const { create, getById, getAll } = require('../../models/cars.model');
+const { create, getById, getAll, filterByClient } = require('../../models/cars.model');
 
 const router = require('express').Router();
 
@@ -37,6 +37,18 @@ router.get('/:carId', async (req, res) => {
     }
 })
 
+
+
+// GET api/cars/client/:clientid
+router.get('/client/:clientid', async (req, res) => {
+    const { clientid } = req.params;
+    try {
+        const [cars] = await filterByClient(clientid)
+        res.json(cars)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+});
 
 
 module.exports = router;

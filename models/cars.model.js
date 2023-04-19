@@ -16,4 +16,14 @@ const getAll = () => {
 }
 
 
-module.exports = { create, getById, getAll }
+
+
+const filterByClient = (clientId) => {
+    return db.query(`SELECT * FROM cars c
+JOIN clients on clients_id = clients.id
+where clients_id = ?`, [clientId])
+}
+
+
+
+module.exports = { create, getById, getAll, filterByClient }

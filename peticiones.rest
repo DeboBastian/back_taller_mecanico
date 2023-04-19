@@ -43,14 +43,14 @@ POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Test65",
-    "surname": "Test65",
+    "name": "Lucia",
+    "surname": "Giron",
     "birthdate": "1996-10-21",
-    "dni": "TEST5564",
-    "phone": "TEST5564",
-    "email": "TEST5564",
-    "username": "TEST564",
-    "password": "123454",
+    "dni": "21341352",
+    "phone": "432145",
+    "email": "lucia@",
+    "username": "mario",
+    "password": "12345",
     "role": "admin"
 }
 
@@ -60,7 +60,7 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "email": "TEST556",
+    "email": "lucia@",
     "password": "12345"
 }
 
@@ -127,10 +127,13 @@ GET {{host}}{{urlReparations}}
 
 
 ### GET BY ID
-GET {{host}}{{urlReparations}}/2
+GET {{host}}{{urlReparations}}/4
 
-###################################################
 
+### GET BY USER
+GET {{host}}{{urlReparations}}/mechanic/20
+
+##################################################
 
 ### API DE COCHES
 
@@ -157,9 +160,13 @@ Content-Type: application/json
 ### GET ALL CARS
 GET {{host}}{{urlCars}}
 
+
 ###GET CAR BY ID
 GET {{host}}{{urlCars}}/1
 
+
+### GET BY CLIENT
+GET {{host}}{{urlCars}}/client/20
 
 
 ##############################################

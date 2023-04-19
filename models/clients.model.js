@@ -21,4 +21,5 @@ const deleteById = (id) => {
     return db.query('delete from clients where clients.id = ?', [id])
 }
 
+
 module.exports = { create, getAll, getById, deleteById }
