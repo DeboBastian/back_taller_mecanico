@@ -18,12 +18,24 @@ const getById = (reparationId) => {
 }
 
 
+const mechanicForReparation = (userId) => {
+    return db.query(`SELECT * FROM reparations r 
+                    JOIN users u on r.users_id = u.id
+                    where r.id = ?`, [userId])
+}
+
+// const reparationByMechanic = (userId) => {
+//     return db.query(`SELECT * FROM reparations where users_id = ?`, [userId])
+// }
+
 const filterByUser = (userId) => {
     return db.query(`SELECT * FROM reparations r 
                     JOIN cars c on r.cars_id = c.id
                     where users_id = ?`, [userId])
 }
 
+const deleteById = (carId) => {
+    return db.query('delete from reparations where reparations.id = ?', [carId])
+}
 
-
-module.exports = { create, getById, filterByUser, getAll }
+module.exports = { create, getById, getAll, mechanicForReparation, filterByUser, deleteById }
