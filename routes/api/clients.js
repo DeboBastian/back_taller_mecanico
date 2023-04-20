@@ -2,7 +2,7 @@
 const router = require('express').Router();
 
 const { create, getById, getAll, deleteById } = require('../../models/clients.model')
-
+const { carOfClient } = require('../../models/cars.model')
 
 router.post('/', async (req, res) => {
 
@@ -38,6 +38,16 @@ router.get('/:clientId', async (req, res) => {
 })
 
 
+// GET api/clients/car/:clientId
+router.get('/car/:clientId', async (req, res) => {
+    const { clientId } = req.params;
+    try {
+        const [car] = await carOfClient(clientId)
+        res.json(car)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+});
 
 router.delete('/:clientId', async (req, res) => {
     const { clientId } = req.params

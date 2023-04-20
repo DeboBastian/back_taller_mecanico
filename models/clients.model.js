@@ -22,4 +22,5 @@ const deleteById = (id) => {
 }
 
 
+
 module.exports = { create, getAll, getById, deleteById }

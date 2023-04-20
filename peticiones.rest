@@ -25,7 +25,7 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOSwiZXhwIjoxN
 
 
 ### GET BY EMAIL
-GET {{host}}{{urlUsers}}/email/test55
+GET {{host}}{{urlUsers}}/email/sara@
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
@@ -60,7 +60,7 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "email": "lucia@",
+    "email": "sara@",
     "password": "12345"
 }
 
@@ -77,13 +77,13 @@ POST {{host}}{{urlClients}}
 Content-Type: application/json
 
 {
-    "name": "Eugenia",
+    "name": "Alberto",
     "surname": "Contreras",
-    "email":"eu@gmail.com",
-    "phone": "76541813",
-    "dni": "987641096",
+    "email":"alberto@",
+    "phone": "765442383",
+    "dni": "9876451096",
     "address": "Plaza Mayor, 23",
-    "card_number": 6153947
+    "card_number": 615453947
 }
 
 ### GET ALL
@@ -92,6 +92,10 @@ GET {{host}}{{urlClients}}
 
 ### GET BY ID
 GET {{host}}{{urlClients}}/8
+
+
+### GET CAR OF CLIENT
+GET {{host}}{{urlClients}}/car/20
 
 
 ### DELETE BY ID
@@ -166,7 +170,7 @@ GET {{host}}{{urlCars}}/1
 
 
 ### GET BY CLIENT
-GET {{host}}{{urlCars}}/client/20
+GET {{host}}{{urlCars}}/client/1
 
 
 ##############################################

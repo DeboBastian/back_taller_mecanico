@@ -16,14 +16,20 @@ const getAll = () => {
 }
 
 
-
-
-const filterByClient = (clientId) => {
-    return db.query(`SELECT * FROM cars c
-JOIN clients on clients_id = clients.id
-where clients_id = ?`, [clientId])
+const filterByClient = (carsId) => {
+    return db.query(`select * from cars ca
+JOIN clients c on ca.clients_id = c.id
+where ca.id = ?`, [carsId])
 }
 
 
+const carOfClient = (clientId) => {
+    return db.query(`select * from cars where clients_id = ?`, [clientId])
+}
 
-module.exports = { create, getById, getAll, filterByClient }
+
+const deleteById = (carId) => {
+    return db.query('delete from cars where cars.id = ?', [carId])
+}
+
+module.exports = { create, getById, getAll, filterByClient, carOfClient, deleteById }
