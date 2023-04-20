@@ -34,7 +34,7 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxN
 
 
 ### DELETE USER BY ID
-DELETE {{host}}{{urlUsers}}/16
+DELETE {{host}}{{urlUsers}}/11
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
@@ -98,8 +98,8 @@ GET {{host}}{{urlClients}}/8
 GET {{host}}{{urlClients}}/car/20
 
 
-### DELETE BY ID
-DELETE {{host}}{{urlClients}}/5
+### DELETE CLIENT BY ID
+DELETE {{host}}{{urlClients}}/11
 
 
 //FIXME: EMAIL OR DNI EN USERS
@@ -169,10 +169,12 @@ GET {{host}}{{urlCars}}
 GET {{host}}{{urlCars}}/1
 
 
-### GET BY CLIENT
+### GET CAR BY CLIENT
 GET {{host}}{{urlCars}}/client/1
 
 
+### DELETE CAR BY ID
+DELETE {{host}}{{urlCars}}/3
 ##############################################
 
 ### GET ALL MECHANICS
