@@ -174,7 +174,7 @@ GET {{host}}{{urlCars}}/client/1
 
 
 ### DELETE CAR BY ID
-DELETE {{host}}{{urlCars}}/3
+DELETE {{host}}{{urlCars}}/4
 ##############################################
 
 ### GET ALL MECHANICS
