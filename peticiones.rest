@@ -185,3 +185,7 @@ GET {{host}}{{urlMechanics}}
 
 ### GET BY ID
 GET {{host}}{{urlMechanics}}/25
+
+
+### DELETE MECHANIC BY ID
+DELETE {{host}}{{urlMechanics}}/25
