@@ -1,4 +1,4 @@
-const { getAll, getById } = require('../../models/mechanicsmodel');
+const { getAll, getById, deleteById } = require('../../models/mechanicsmodel');
 
 
 const router = require('express').Router();
@@ -23,5 +23,19 @@ router.get('/:mechanicId', async (req, res) => {
         res.json({ fatal: error.message });
     }
 })
+
+
+router.delete('/:mechanicId', async (req, res) => {
+    const { mechanicId } = req.params
+
+    try {
+        const [mechanic] = await getById(mechanicId)
+        const [result] = await deleteById(mechanicId)
+        console.log(result)
+        res.json(mechanic[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+});
 
 module.exports = router;

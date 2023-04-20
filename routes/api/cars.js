@@ -1,4 +1,4 @@
-const { create, getById, getAll, filterByClient } = require('../../models/cars.model');
+const { create, getById, getAll, filterByClient, deleteById } = require('../../models/cars.model');
 
 const router = require('express').Router();
 
@@ -47,6 +47,20 @@ router.get('/client/:clientid', async (req, res) => {
         res.json(cars)
     } catch (error) {
         res.json({ fatal: error.message })
+    }
+});
+
+
+router.delete('/:carId', async (req, res) => {
+    const { carId } = req.params
+
+    try {
+        const [car] = await getById(carId)
+        const [result] = await deleteById(carId)
+        console.log(result)
+        res.json(car[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
     }
 });
 
