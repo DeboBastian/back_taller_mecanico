@@ -1,11 +1,11 @@
 const { create, getById, getAll, filterByClient, deleteById } = require('../../models/cars.model');
+//const { checkAdmin } = require('../../helpers/middlewares');
 
 const router = require('express').Router();
 
 
 
 router.post('/', async (req, res) => {
-
     try {
         const [newCar] = await create(req.body);
         const [car] = await getById(newCar.insertId)
@@ -31,6 +31,9 @@ router.get('/:carId', async (req, res) => {
     const { carId } = req.params;
     try {
         const [car] = await getById(carId)
+        if (car.length === 0) {
+            return res.json({ fatal: 'This car does not exist' })
+        }
         res.json(car[0])
     } catch (error) {
         res.json({ fatal: error.message });
@@ -57,7 +60,9 @@ router.delete('/:carId', async (req, res) => {
     try {
         const [car] = await getById(carId)
         const [result] = await deleteById(carId)
-        console.log(result)
+        if (car.length === 0) {
+            return res.json({ fatal: 'This car does not exist' })
+        }
         res.json(car[0])
     } catch (error) {
         res.json({ fatal: error.message });

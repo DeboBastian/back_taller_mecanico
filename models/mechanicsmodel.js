@@ -12,4 +12,6 @@ const getById = (mechanicId) => {
 const deleteById = (id) => {
     return db.query('delete from users where role = "mechanic" and id = ?', [id])
 }
+
+
 module.exports = { getAll, getById, deleteById }

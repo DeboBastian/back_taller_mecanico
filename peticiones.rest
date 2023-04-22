@@ -7,35 +7,21 @@
 @urlCars = /api/cars
 @urlMechanics = /api/mechanics
 
-### API DE USUARIOS (ADMIN Y MECHANIC)
-//Cuando hacemos login vamos a la interfaz de admin o clientes segun el login que hagamos, en users creo que solo habria que sacar cada user por id, mail, dni. Borrar por id. 
+### API DE USUARIOS (ADMIN)
 
 
-### GET ALL USERS
-GET {{host}}{{urlUsers}}
+# ### GET BY ID
+# GET {{host}}{{urlUsers}}/11
+# Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
+
+# ### GET BY DNI
+# GET {{host}}{{urlUsers}}/dni/TEST556
+# Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOSwiZXhwIjoxNjg4NjI0Mjc0LCJpYXQiOjE2ODE3MTIyNzR9.RYSAHldxuHLFYLukClwzGrCOjKzletdMtCE5KzeaeOo
 
 
-### GET BY ID
-GET {{host}}{{urlUsers}}/11
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
-
-### GET BY DNI
-GET {{host}}{{urlUsers}}/dni/TEST556
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOSwiZXhwIjoxNjg4NjI0Mjc0LCJpYXQiOjE2ODE3MTIyNzR9.RYSAHldxuHLFYLukClwzGrCOjKzletdMtCE5KzeaeOo
-
-
-### GET BY EMAIL
-GET {{host}}{{urlUsers}}/email/sara@
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
-
-
-# ### GET BY DNI OR EMAIL
-# GET {{host}}{{urlUsers}}/mixto/TEST55
-
-
-### DELETE USER BY ID
-DELETE {{host}}{{urlUsers}}/11
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
+# ### GET BY EMAIL
+# GET {{host}}{{urlUsers}}/email/sara@
+# Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywiZXhwIjoxNjg4NDYxNDg0LCJpYXQiOjE2ODE1NDk0ODR9.ifmy-xfFTuogqkEl4zbXhSuKsYfDQBnv0k98vwKgkM8
 
 
 ### NEW USER
@@ -43,13 +29,13 @@ POST {{host}}{{urlUsers}}/register
 Content-Type: application/json
 
 {
-    "name": "Lucia",
-    "surname": "Giron",
-    "birthdate": "1996-10-21",
-    "dni": "21341352",
-    "phone": "432145",
-    "email": "lucia@",
-    "username": "mario",
+    "name": "Lula",
+    "surname": "Martin",
+    "birthdate": "1966-10-21",
+    "dni": "213452",
+    "phone": "6432145",
+    "email": "lula@",
+    "username": "lula",
     "password": "12345",
     "role": "admin"
 }
@@ -60,17 +46,44 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "email": "sara@",
+    "email": "lula@",
+    "dni" : "0897430984",
+    "password": "1234"
+}
+
+
+### GET ADMIN EMPLOYERS
+GET {{host}}{{urlUsers}}/admins
+
+
+### GET ADMIN EMPLOYERS BY ID
+GET {{host}}{{urlUsers}}/admins/1
+
+
+### EDIT USER
+PUT {{host}}{{urlUsers}}/edit/40
+Content-Type: application/json
+
+{
+    "name": "Lula",
+    "surname": "Romero",
+    "birthdate": "1967-10-13",
+    "dni": "71254837O2",
+    "phone": "661542362",
+    "email": "lula2@",
+    "username": "Lula",
     "password": "12345"
 }
 
+
+### DELETE ADMIN EMPLOYER
+DELETE {{host}}{{urlUsers}}/admin/13
 
 ###################################################
 
 
 ### API DE CLIENTES
-//Cuando accedemos a los clientes podemos: VER TODOS, VER UNO, CREAR y BORRAR POR ID
-//MODIFICAR??
+
 
 ### NEW CLIENT
 POST {{host}}{{urlClients}}
@@ -116,12 +129,11 @@ POST {{host}}{{urlReparations}}
 Content-Type: application/json
 
 {
-    "status": "in_progress",
     "type": "mechanic",
-    "reparation":"xxx",
+    "reparation":"revision",
     "price": "200",
-    "users_id": 11,
-    "cars_id": 1
+    "users_id": 40,
+    "cars_id": 9
 }
 
 
@@ -134,13 +146,27 @@ GET {{host}}{{urlReparations}}
 GET {{host}}{{urlReparations}}/4
 
 
-### GET BY USER
-GET {{host}}{{urlReparations}}/mechanic/20
+### GET MECHANIC OF THIS REPARATION
+GET {{host}}{{urlReparations}}/mechanic/
+
+
+### EDIT REPARATION
+PUT {{host}}{{urlReparations}}/edit/19
+Content-Type: application/json
+
+ {
+    "status": "in_progress",
+    "type": "mechanic",
+    "reparation":"need revision",
+    "price": "200",
+    "users_id": 40
+    
+}
 
 
 ### DELETE REPARATION
 
-DELETE {{host}}{{urlReparations}}/1
+DELETE {{host}}{{urlReparations}}/3
 
 
 ##################################################

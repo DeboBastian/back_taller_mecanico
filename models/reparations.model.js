@@ -1,9 +1,9 @@
 const tokengen = require("tokengn")
 
-const create = ({ status, type, reparation, price, users_id, cars_id }) => {
+const create = ({ type, reparation, price, users_id, cars_id }) => {
 
     return db.query(
-        'insert into reparations (status, type, reparation, price, bill_number,users_id, cars_id) values (?,?,?,?,?,?,?)', [status, type, reparation, price, tokengen(), users_id, cars_id]
+        'insert into reparations ( type, reparation, price, bill_number,users_id, cars_id) values (?,?,?,?,?,?)', [type, reparation, price, tokengen(), users_id, cars_id]
     )
 
 }
@@ -38,4 +38,13 @@ const deleteById = (carId) => {
     return db.query('delete from reparations where reparations.id = ?', [carId])
 }
 
-module.exports = { create, getById, getAll, mechanicForReparation, filterByUser, deleteById }
+
+const updateById = (reparationId, { status, type, reparation, price, users_id }) => {
+    return db.query(` update reparations set status = ?, type = ?, reparation = ?, price = ?, users_id = ? where id = ?`,
+
+        [status, type, reparation, price, users_id, reparationId]
+    )
+}
+
+
+module.exports = { create, getById, getAll, mechanicForReparation, filterByUser, deleteById, updateById }

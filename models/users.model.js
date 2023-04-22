@@ -27,19 +27,34 @@ const getByEmail = (email) => {
     return db.query('select * from users where email = ?', [email])
 }
 
-//he creado esta query porque pensamos en hacer el login a traves del DNI, pero al poner en los validadores un DNI verdadero y en la base de datos, DNI unico, creo que es mas conveniente poder meter tambien el email para que sea más facil hacer las puebas
-const getBydniORemail = (dni, email) => {
-    return db.query('SELECT * FROM taller_mecanico_proyecto.users WHERE users.dni = ? or email = ?', [dni, email])
-}
-
 
 const deleteById = (id) => {
     return db.query('delete from users where users.id = ?', [id])
 }
 
 
-module.exports = { create, getAll, getByDni, getById, getByEmail, deleteById, getBydniORemail }
+const updateAdminById = (userId, { name, surname, birthdate, dni, phone, email, username, password }) => {
+    return db.query(` update users set name = ?, surname = ?, birthdate = ?, dni = ?, phone = ?, email = ?, username = ?, password = ? where id = ?`,
+
+        [name, surname, birthdate, dni, phone, email, username, password, userId]
+    )
+}
 
 
-// TODO:
-//get byDNI or email 
+
+const getAdminEmployers = () => {
+    return db.query('SELECT * FROM users WHERE role = "admin"')
+}
+
+
+const getEmployerById = (adminId) => {
+    return db.query('select * from users WHERE role = "admin" and id = ?', [adminId])
+}
+
+
+const deleteEmployerById = (id) => {
+    return db.query('delete from users where role = "admin" and id = ?', [id])
+}
+
+module.exports = { create, getAll, getByDni, getById, getByEmail, deleteById, updateAdminById, getAdminEmployers, getEmployerById, deleteEmployerById }
+

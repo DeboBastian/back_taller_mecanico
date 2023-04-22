@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { create, getById, getAll, deleteById, mechanicForReparation, filterByUser } = require('../../models/reparations.model')
+const { create, getById, getAll, deleteById, mechanicForReparation, filterByUser, updateById } = require('../../models/reparations.model')
+//const { checkAdmin } = require('../../helpers/middlewares');
+
 
 router.post('/', async (req, res) => {
 
@@ -29,6 +31,9 @@ router.get('/:reparationId', async (req, res) => {
     const { reparationId } = req.params;
     try {
         const [reparation] = await getById(reparationId)
+        if (reparation.length === 0) {
+            return res.json({ fatal: 'This employeer does not exist' })
+        }
         res.json(reparation[0])
     } catch (error) {
         res.json({ fatal: error.message });
@@ -72,17 +77,35 @@ router.get('/mechanic/:userid', async (req, res) => {
 // });
 
 
+router.put('/edit/:reparationId', async (req, res) => {
+    const { reparationId } = req.params
+    try {
+        const [result] = await updateById(reparationId, req.body);
+        console.log(reparation[0])
+        if (reparation.length === 0) {
+            return res.json({ fatal: 'This reparation does not exist' })
+        }
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+})
+
+
 router.delete('/:reparationId', async (req, res) => {
     const { reparationId } = req.params
 
     try {
         const [reparation] = await getById(reparationId)
         const [result] = await deleteById(reparationId)
-        console.log(result)
+        if (reparation.length === 0) {
+            return res.json({ fatal: 'This reparation does not exist' })
+        }
         res.json(reparation[0])
     } catch (error) {
         res.json({ fatal: error.message });
     }
 });
+
 
 module.exports = router;

@@ -2,9 +2,11 @@
 const router = require('express').Router();
 const encript = require('bcryptjs')
 
-const { create, getAll, getById, getByEmail, getByDni, deleteById, getBydniORemail } = require('../../models/users.model')
+const { create, getById, getByEmail, getByDni, deleteById, updateById, getAdminEmployers, getEmployerById, deleteEmployerById, updateAdminById } = require('../../models/users.model')
 const { createToken } = require('../../helpers/utils');
 const { checkToken } = require('../../helpers/middlewares');
+//const { checkAdmin } = require('../../helpers/middlewares');
+
 
 
 router.post('/register', async (req, res) => {
@@ -21,107 +23,88 @@ router.post('/register', async (req, res) => {
 })
 
 
+
 router.post('/login', async (req, res) => {
-
     try {
-        // const [result] = await getByDNI(req.body.dni);
-        const [result] = await getByEmail(req.body.email);
-        if (result.length === 0) {
-            return res.json({ fatal: 'Email or password wrong' })
+        const [result_dni] = await getByDni(req.body.dni);
+        const [result_email] = await getByEmail(req.body.email);
+        console.log(result_dni)
+        if (result_dni.length === 0 && result_email.length === 0) {
+            return res.json({ fatal: '(DNI / Email) or password wrong' })
         }
-        const user = result[0];
+
+        var user
+        if (result_dni.length > 0) {
+            user = result_dni[0]
+
+            const samePassword = encript.compareSync(req.body.password, user.password);
+            if (!samePassword) {
+                return res.json({ fatal: 'DNI or password wrong' })
+            }
+            res.json({
+                succes: 'Successful Login',
+                token: createToken(user)
+            })
 
 
-        const samePassword = encript.compareSync(req.body.password, user.password);
-        if (!samePassword) {
-            return res.json({ fatal: 'Email or password wrong' })
+        } else if (result_email.length > 0) {
+            user = result_email[0]
+
+            const samePassword = encript.compareSync(req.body.password, user.password);
+            if (!samePassword) {
+                return res.json({ fatal: 'Email or password wrong' })
+            }
+            res.json({
+                succes: 'Successful Login',
+                token: createToken(user)
+            })
         }
-        res.json({
-            succes: 'Successful Login',
-            token: createToken(user)
-        })
-
     } catch (error) {
-        res.json({ fatal: error.message })
+        console.log(error)
     }
 })
 
 
-router.get('/', async (req, res) => {
+
+router.get('/admins', async (req, res) => {
+
     try {
-        const [users] = await getAll();
-        res.json(users);
+        const [employeers] = await getAdminEmployers()
+        console.log(employeers);
+        res.json(employeers);
     } catch (error) {
         res.json({ fatal: error.message })
     }
 });
 
 
-router.get('/:userId', checkToken, async (req, res) => {
-    const { userId } = req.params;
-
+router.get('/admins/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const [result] = await getById(userId)
-        if (result.length === 0) {
+        const [employee] = await getEmployerById(id)
+        if (employee.length === 0) {
             return res.json({ fatal: "User doesn't exist" })
         }
 
-
-        const [users] = await getById(userId);
-        res.json(users)
+        res.json(employee[0]);
     } catch (error) {
         res.json({ fatal: error.message })
     }
-})
-
-
-router.get('/email/:userEmail', checkToken, async (req, res) => {
-    const { userEmail } = req.params
-    try {
-        const [result] = await getByEmail(userEmail)
-        console.log(result)
-        if (result.length === 0) {
-            return res.json({ fatal: "Email doesn't exist" })
-        }
-
-        const [users] = await getByEmail(userEmail);
-        res.json(users)
-    } catch (error) {
-        res.json({ fatal: error.message })
-    }
-})
-
-
-router.get('/dni/:userDni', checkToken, async (req, res) => {
-    const { userDni } = req.params;
-
-    try {
-        const [result] = await getByDni(userDni)
-        if (result.length === 0) {
-            return res.json({ fatal: "User doesn't exist" })
-        }
-
-
-        const [users] = await getByDni(userDni);
-        res.json(users)
-    } catch (error) {
-        res.json({ fatal: error.message })
-    }
-})
+});
 
 
 
-// router.get('/mixto/:emailordni', async (req, res) => {
-//     const { userEmail, userDni } = req.params
+// router.get('/:userId', async (req, res) => {
+//     const { userId } = req.params;
 
 //     try {
-//         const [result] = await getBydniORemail(userEmail || userDni)
-//         console.log(result)
+//         const [result] = await getById(userId)
 //         if (result.length === 0) {
-//             return res.json({ fatal: "Email doesn't exist" })
+//             return res.json({ fatal: "User doesn't exist" })
 //         }
 
-//         const [users] = await getBydniORemail(userEmail, userDni);
+
+//         const [users] = await getById(userId);
 //         res.json(users)
 //     } catch (error) {
 //         res.json({ fatal: error.message })
@@ -129,13 +112,67 @@ router.get('/dni/:userDni', checkToken, async (req, res) => {
 // })
 
 
-router.delete('/:userId', checkToken, async (req, res) => {
+// router.get('/email/:userEmail', async (req, res) => {
+//     const { userEmail } = req.params
+//     try {
+//         const [result] = await getByEmail(userEmail)
+//         console.log(result)
+//         if (result.length === 0) {
+//             return res.json({ fatal: "Email doesn't exist" })
+//         }
+
+//         const [users] = await getByEmail(userEmail);
+//         res.json(users)
+//     } catch (error) {
+//         res.json({ fatal: error.message })
+//     }
+// })
+
+
+
+// router.get('/dni/:userDni', async (req, res) => {
+//     const { userDni } = req.params;
+
+//     try {
+//         const [result] = await getByDni(userDni)
+//         if (result.length === 0) {
+//             return res.json({ fatal: "User doesn't exist" })
+//         }
+//         const [users] = await getByDni(userDni);
+//         res.json(users)
+//     } catch (error) {
+//         res.json({ fatal: error.message })
+//     }
+// })
+
+
+// EDITAR EMPLEADO DE ADMIN
+router.put('/edit/:userId', async (req, res) => {
     const { userId } = req.params
+    try {
+        const [result] = await updateAdminById(userId, req.body);
+
+        if (user.length === 0) {
+            return res.json({ fatal: 'This employeer does not exist' })
+        }
+
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+})
+
+
+//BORRAR EMPLEADO DE ADMIN
+router.delete('/admin/:adminId', async (req, res) => {
+    const { adminId } = req.params
 
     try {
-        const [user] = await getById(userId)
-        const [result] = await deleteById(userId)
-        res.json(user[0])
+        const [admin] = await getEmployerById(adminId)
+        const [result] = await deleteEmployerById(adminId)
+        if (user.length === 0) {
+            return res.json({ fatal: 'This employeer does not exist' })
+        }
+        res.json(admin[0])
     } catch (error) {
         res.json({ fatal: error.message });
     }
