@@ -64,5 +64,17 @@ router.delete('/:carId', async (req, res) => {
     }
 });
 
+router.put('/:carId', async (req, res) => {
+    const { carId } = req.params
+
+    try {
+        const [car] = await updateById(carId)
+        const [result] = await updateById(carId)
+        console.log(result)
+        res.json(car[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+});
 
 module.exports = router;

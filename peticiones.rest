@@ -172,9 +172,14 @@ GET {{host}}{{urlCars}}/1
 ### GET CAR BY CLIENT
 GET {{host}}{{urlCars}}/client/1
 
+### PUT CAR BY ID
+PUT {{host}}{{urlCars}}/1
+###
+
 
 ### DELETE CAR BY ID
 DELETE {{host}}{{urlCars}}/4
+
 ##############################################
 
 ### GET ALL MECHANICS
