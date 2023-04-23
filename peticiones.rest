@@ -32,10 +32,10 @@ Content-Type: application/json
     "name": "Lula",
     "surname": "Martin",
     "birthdate": "1966-10-21",
-    "dni": "213452",
-    "phone": "6432145",
-    "email": "lula@",
-    "username": "lula",
+    "dni": "2134523",
+    "phone": "64321453",
+    "email": "lula3@",
+    "username": "lula3",
     "password": "12345",
     "role": "admin"
 }
@@ -46,9 +46,9 @@ POST {{host}}{{urlUsers}}/login
 Content-Type: application/json
 
 {
-    "email": "lula@",
+    "email": "lula3@",
     "dni" : "0897430984",
-    "password": "1234"
+    "password": "12345"
 }
 
 
@@ -57,27 +57,27 @@ GET {{host}}{{urlUsers}}/admins
 
 
 ### GET ADMIN EMPLOYERS BY ID
-GET {{host}}{{urlUsers}}/admins/1
+GET {{host}}{{urlUsers}}/admins/43
 
 
 ### EDIT USER
-PUT {{host}}{{urlUsers}}/edit/40
+PUT {{host}}{{urlUsers}}/users/edit/27
 Content-Type: application/json
 
 {
-    "name": "Lula",
-    "surname": "Romero",
+    "name": "deborah",
+    "surname": "Romero4",
     "birthdate": "1967-10-13",
-    "dni": "71254837O2",
-    "phone": "661542362",
-    "email": "lula2@",
-    "username": "Lula",
+    "dni": "7125483",
+    "phone": "661542",
+    "email": "lula24@R",
+    "username": "Lula4",
     "password": "12345"
 }
 
 
 ### DELETE ADMIN EMPLOYER
-DELETE {{host}}{{urlUsers}}/admin/13
+DELETE {{host}}{{urlUsers}}/admin/433
 
 ###################################################
 
@@ -90,13 +90,13 @@ POST {{host}}{{urlClients}}
 Content-Type: application/json
 
 {
-    "name": "Alberto",
+    "name": "Alberto34",
     "surname": "Contreras",
-    "email":"alberto@",
-    "phone": "765442383",
-    "dni": "9876451096",
+    "email":"alberto34@",
+    "phone": "76544238334",
+    "dni": "987645109634",
     "address": "Plaza Mayor, 23",
-    "card_number": 615453947
+    "card_number": "453454539473"
 }
 
 ### GET ALL
@@ -104,7 +104,7 @@ GET {{host}}{{urlClients}}
 
 
 ### GET BY ID
-GET {{host}}{{urlClients}}/8
+GET {{host}}{{urlClients}}/9
 
 
 ### GET CAR OF CLIENT
@@ -160,7 +160,6 @@ Content-Type: application/json
     "reparation":"need revision",
     "price": "200",
     "users_id": 40
-    
 }
 
 
