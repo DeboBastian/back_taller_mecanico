@@ -81,6 +81,7 @@ router.put('/edit/:reparationId', async (req, res) => {
     const { reparationId } = req.params
     try {
         const [result] = await updateById(reparationId, req.body);
+
         console.log(reparation[0])
         if (reparation.length === 0) {
             return res.json({ fatal: 'This reparation does not exist' })

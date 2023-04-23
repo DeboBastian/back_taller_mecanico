@@ -34,7 +34,7 @@ const deleteById = (id) => {
 
 
 const updateAdminById = (userId, { name, surname, birthdate, dni, phone, email, username, password }) => {
-    return db.query(` update users set name = ?, surname = ?, birthdate = ?, dni = ?, phone = ?, email = ?, username = ?, password = ? where id = ?`,
+    return db.query(` update taller_mecanico_proyecto.users set name = ?, surname = ?, birthdate = ?, dni = ?, phone = ?, email = ?, username = ?, password = ? where id = ?`,
 
         [name, surname, birthdate, dni, phone, email, username, password, userId]
     )

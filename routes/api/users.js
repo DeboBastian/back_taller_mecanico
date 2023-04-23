@@ -150,7 +150,7 @@ router.get('/admins/:id', async (req, res) => {
 router.put('/edit/:userId', async (req, res) => {
     const { userId } = req.params
     try {
-        const [result] = await updateAdminById(userId, req.body);
+        const [user] = await updateAdminById(userId, req.body);
 
         if (user.length === 0) {
             return res.json({ fatal: 'This employeer does not exist' })
