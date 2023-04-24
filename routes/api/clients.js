@@ -63,3 +63,15 @@ router.delete('/:clientId', async (req, res) => {
 });
 
 module.exports = router;
+
+router.put('/:clientId', async (req, res) => {
+    const { clientId } = req.params
+    const { name, email, phone } = req.body
+
+    try {
+        const result = await Client.findByIdAndUpdate(clientId, { name, email, phone }, { new: true })
+        res.json(result)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+})
