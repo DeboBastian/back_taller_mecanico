@@ -3,7 +3,6 @@ const create = ({ chasis, registration, brand, model, color, km, year, doors, ty
     return db.query(
         'insert into cars (chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, clients_id) values (?,?,?,?,?,?,?,?,?,?,?,?)', [chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, clients_id]
     )
-
 }
 
 const getById = (carId) => {
@@ -27,9 +26,15 @@ const carOfClient = (clientId) => {
     return db.query(`select * from cars where clients_id = ?`, [clientId])
 }
 
+const updateById = (carId, {chasis, registration, brand, model, color, km, year, doors, type, fuel, damages}) => {
+    return db.query(
+        'update cars set chasis = ?, registration = ?, brand = ?, model = ?, color = ?, km = ?, year = ?, doors = ?, type = ?, fuel = ?, damages = ? where id = ?',
+        [chasis, registration, brand, model, color, km, year, doors, type, fuel, damages, carId]
+    )
+};
 
 const deleteById = (carId) => {
     return db.query('delete from cars where cars.id = ?', [carId])
 }
 
-module.exports = { create, getById, getAll, filterByClient, carOfClient, deleteById }
+module.exports = { create, getById, getAll, filterByClient, carOfClient, deleteById, updateById }
