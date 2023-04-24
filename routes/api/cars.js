@@ -1,4 +1,4 @@
-const { create, getById, getAll, filterByClient, deleteById } = require('../../models/cars.model');
+const { create, getById, getAll, filterByClient, deleteById, updateById } = require('../../models/cars.model');
 //const { checkAdmin } = require('../../helpers/middlewares');
 
 const router = require('express').Router();
@@ -54,6 +54,18 @@ router.get('/client/:clientid', async (req, res) => {
 });
 
 
+router.put('/:carId', async (req, res) => {
+    const { carId } = req.params
+    console.log(req.body);
+    try {
+        const [car] = await updateById(parseInt(carId), req.body);
+        res.json(car[0])
+    } catch (error) {
+        res.json({ fatal: error.message });
+    }
+});
+
+
 router.delete('/:carId', async (req, res) => {
     const { carId } = req.params
 
@@ -69,17 +81,5 @@ router.delete('/:carId', async (req, res) => {
     }
 });
 
-router.put('/:carId', async (req, res) => {
-    const { carId } = req.params
-
-    try {
-        const [car] = await updateById(carId)
-        const [result] = await updateById(carId)
-        console.log(result)
-        res.json(car[0])
-    } catch (error) {
-        res.json({ fatal: error.message });
-    }
-});
 
 module.exports = router;

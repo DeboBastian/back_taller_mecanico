@@ -204,9 +204,23 @@ GET {{host}}{{urlCars}}/1
 ### GET CAR BY CLIENT
 GET {{host}}{{urlCars}}/client/1
 
-### PUT CAR BY ID
+### EDIT CAR BY ID
 PUT {{host}}{{urlCars}}/1
-###
+Content-Type: application/json
+
+{  
+    "chasis": "432546",
+    "registration": "453635",
+    "brand":"MERCEDES",
+    "model": "S 500",
+    "color": "black",
+    "km": 78975,
+    "year": 2020,
+    "doors": 5,
+    "type": "automatic",
+    "fuel": "gasoil",
+    "damages": "Change neumatics",
+}
 
 ### DELETE CAR BY ID
 DELETE {{host}}{{urlCars}}/4
