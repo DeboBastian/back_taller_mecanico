@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-const { create, getById, getAll, deleteById } = require('../../models/clients.model')
+const { create, getById, getAll, deleteById, findByIdAndUpdate } = require('../../models/clients.model')
 const { carOfClient } = require('../../models/cars.model')
 const { checkAdmin } = require('../../helpers/middlewares');
 
@@ -73,7 +73,19 @@ router.delete('/:clientId', checkAdmin, async (req, res) => {
 });
 
 
-//TODO:
-// Falta update (PUT) con checkAdmin
+
+router.put('/:clientId', checkAdmin, async (req, res) => {
+    console.log(req.params)
+    const { clientId } = req.params
+    const { name, surname, email, phone, dni, address, card_number } = req.body
+
+    try {
+        const [result] = await findByIdAndUpdate({ name, surname, email, phone, dni, address, card_number }, clientId)
+        res.json(result)
+    } catch (error) {
+        res.json({ fatal: error.message })
+    }
+})
+
 
 module.exports = router;

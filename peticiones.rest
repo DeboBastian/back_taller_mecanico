@@ -212,6 +212,24 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NSwidXNlcl9yb
 GET {{host}}{{urlCars}}/client/1
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NSwidXNlcl9yb2xlIjoiYWRtaW4iLCJleHAiOjE2ODkxNzU2MjEsImlhdCI6MTY4MjI2MzYyMX0.G9_Tgj7B4PT2jvzkV0zUfnk0MjQVUIlr3650zZ6yFqo
 
+### EDIT CAR BY ID
+PUT {{host}}{{urlCars}}/1
+Content-Type: application/json
+
+{  
+    "chasis": "432546",
+    "registration": "453635",
+    "brand":"MERCEDES",
+    "model": "S 500",
+    "color": "black",
+    "km": 78975,
+    "year": 2020,
+    "doors": 5,
+    "type": "automatic",
+    "fuel": "gasoil",
+    "damages": "Change neumatics",
+}
+
 ### DELETE CAR BY ID
 DELETE {{host}}{{urlCars}}/6
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NSwidXNlcl9yb2xlIjoiYWRtaW4iLCJleHAiOjE2ODkxNzU2MjEsImlhdCI6MTY4MjI2MzYyMX0.G9_Tgj7B4PT2jvzkV0zUfnk0MjQVUIlr3650zZ6yFqo
