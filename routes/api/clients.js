@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-const { create, getById, getAll, deleteById } = require('../../models/clients.model')
+const { create, getById, getAll, deleteById, findByIdAndUpdate } = require('../../models/clients.model')
 const { carOfClient } = require('../../models/cars.model')
 
 router.post('/', async (req, res) => {
@@ -62,16 +62,20 @@ router.delete('/:clientId', async (req, res) => {
     }
 });
 
-module.exports = router;
+
 
 router.put('/:clientId', async (req, res) => {
+    console.log(req.params)
     const { clientId } = req.params
-    const { name, email, phone } = req.body
+    const { name, surname, email, phone, dni, address, card_number } = req.body
 
     try {
-        const result = await Client.findByIdAndUpdate(clientId, { name, email, phone }, { new: true })
+        const [result] = await findByIdAndUpdate({ name, surname, email, phone, dni, address, card_number }, clientId)
         res.json(result)
     } catch (error) {
         res.json({ fatal: error.message })
     }
 })
+
+
+module.exports = router;
