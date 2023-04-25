@@ -31,5 +31,5 @@ const checkAdmin = (req, res, next) => {
 }
 
 module.exports = {
-    checkToken
+    checkToken, checkAdmin
 }

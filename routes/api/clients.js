@@ -3,10 +3,10 @@ const router = require('express').Router();
 
 const { create, getById, getAll, deleteById } = require('../../models/clients.model')
 const { carOfClient } = require('../../models/cars.model')
-//const { checkAdmin } = require('../../helpers/middlewares');
+const { checkAdmin } = require('../../helpers/middlewares');
 
 
-router.post('/', async (req, res) => {
+router.post('/', checkAdmin, async (req, res) => {
 
     try {
         const [newClient] = await create(req.body);
@@ -34,10 +34,11 @@ router.get('/:clientId', async (req, res) => {
     const { clientId } = req.params;
     try {
         const [client] = await getById(clientId)
-        res.json(client[0])
+
         if (client.length === 0) {
             return res.json({ fatal: 'This client does not exist' })
         }
+        res.json(client[0])
     } catch (error) {
         res.json({ fatal: error.message });
     }
@@ -56,7 +57,7 @@ router.get('/car/:clientId', async (req, res) => {
 });
 
 
-router.delete('/:clientId', async (req, res) => {
+router.delete('/:clientId', checkAdmin, async (req, res) => {
     const { clientId } = req.params
 
     try {
@@ -71,5 +72,8 @@ router.delete('/:clientId', async (req, res) => {
     }
 });
 
+
+//TODO:
+// Falta update (PUT) con checkAdmin
 
 module.exports = router;

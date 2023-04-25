@@ -5,11 +5,11 @@ const encript = require('bcryptjs')
 const { create, getById, getByEmail, getByDni, deleteById, updateById, getAdminEmployers, getEmployerById, deleteEmployerById, updateAdminById } = require('../../models/users.model')
 const { createToken } = require('../../helpers/utils');
 const { checkToken } = require('../../helpers/middlewares');
-//const { checkAdmin } = require('../../helpers/middlewares');
+const { checkAdmin } = require('../../helpers/middlewares');
 
 
 
-router.post('/register', async (req, res) => {
+router.post('/register', checkToken, checkAdmin, async (req, res) => {
 
     req.body.password = encript.hashSync(req.body.password, 10);
 
@@ -28,7 +28,7 @@ router.post('/login', async (req, res) => {
     try {
         const [result_dni] = await getByDni(req.body.dni);
         const [result_email] = await getByEmail(req.body.email);
-        console.log(result_dni)
+
         if (result_dni.length === 0 && result_email.length === 0) {
             return res.json({ fatal: '(DNI / Email) or password wrong' })
         }
@@ -60,17 +60,16 @@ router.post('/login', async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error)
+        res.json({ fatal: error.message })
     }
 })
 
 
 
-router.get('/admins', async (req, res) => {
+router.get('/admins', checkToken, async (req, res) => {
 
     try {
         const [employeers] = await getAdminEmployers()
-        console.log(employeers);
         res.json(employeers);
     } catch (error) {
         res.json({ fatal: error.message })
@@ -78,7 +77,7 @@ router.get('/admins', async (req, res) => {
 });
 
 
-router.get('/admins/:id', async (req, res) => {
+router.get('/admins/:id', checkToken, async (req, res) => {
     const { id } = req.params;
     try {
         const [employee] = await getEmployerById(id)
@@ -147,7 +146,7 @@ router.get('/admins/:id', async (req, res) => {
 
 
 // EDITAR EMPLEADO DE ADMIN
-router.put('/edit/:userId', async (req, res) => {
+router.put('/edit/:userId', checkToken, checkAdmin, async (req, res) => {
     const { userId } = req.params
     try {
         const [user] = await updateAdminById(userId, req.body);
@@ -155,7 +154,7 @@ router.put('/edit/:userId', async (req, res) => {
         if (user.length === 0) {
             return res.json({ fatal: 'This employeer does not exist' })
         }
-
+        res.json(user)
     } catch (error) {
         res.json({ fatal: error.message })
     }
@@ -163,13 +162,13 @@ router.put('/edit/:userId', async (req, res) => {
 
 
 //BORRAR EMPLEADO DE ADMIN
-router.delete('/admin/:adminId', async (req, res) => {
+router.delete('/admin/:adminId', checkToken, checkAdmin, async (req, res) => {
     const { adminId } = req.params
 
     try {
         const [admin] = await getEmployerById(adminId)
         const [result] = await deleteEmployerById(adminId)
-        if (user.length === 0) {
+        if (admin.length === 0) {
             return res.json({ fatal: 'This employeer does not exist' })
         }
         res.json(admin[0])

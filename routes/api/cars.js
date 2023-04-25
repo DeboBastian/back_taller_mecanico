@@ -1,11 +1,11 @@
 const { create, getById, getAll, filterByClient, deleteById } = require('../../models/cars.model');
-//const { checkAdmin } = require('../../helpers/middlewares');
+const { checkAdmin } = require('../../helpers/middlewares');
 
 const router = require('express').Router();
 
 
 
-router.post('/', async (req, res) => {
+router.post('/', checkAdmin, async (req, res) => {
     try {
         const [newCar] = await create(req.body);
         const [car] = await getById(newCar.insertId)
@@ -54,7 +54,7 @@ router.get('/client/:clientid', async (req, res) => {
 });
 
 
-router.delete('/:carId', async (req, res) => {
+router.delete('/:carId', checkAdmin, async (req, res) => {
     const { carId } = req.params
 
     try {
@@ -69,13 +69,13 @@ router.delete('/:carId', async (req, res) => {
     }
 });
 
-router.put('/:carId', async (req, res) => {
+router.put('/:carId', checkAdmin, async (req, res) => {
     const { carId } = req.params
 
     try {
         const [car] = await updateById(carId)
         const [result] = await updateById(carId)
-        console.log(result)
+
         res.json(car[0])
     } catch (error) {
         res.json({ fatal: error.message });

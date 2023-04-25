@@ -1,9 +1,9 @@
 const tokengen = require("tokengn")
 
-const create = ({ type, reparation, price, users_id, cars_id }) => {
+const create = ({ type_rep, reparation, price, users_id, cars_id }) => {
 
     return db.query(
-        'insert into reparations ( type, reparation, price, bill_number,users_id, cars_id) values (?,?,?,?,?,?)', [type, reparation, price, tokengen(), users_id, cars_id]
+        'insert into reparations ( type_rep, reparation, price, bill_number,users_id, cars_id) values (?,?,?,?,?,?)', [type_rep, reparation, price, tokengen(), users_id, cars_id]
     )
 
 }
@@ -14,7 +14,7 @@ const getAll = () => {
 
 
 const getById = (reparationId) => {
-    return db.query('select * from reparations where id = ?', [reparationId])
+    return db.query('select reparations.*, cars.chasis, cars.brand, cars.model from reparations, cars where reparations.cars_id = cars.id and reparations.id = ?', [reparationId])
 }
 
 
@@ -39,12 +39,12 @@ const deleteById = (carId) => {
 }
 
 
-const updateById = (reparationId, { status, type, reparation, price, users_id }) => {
-    return db.query(` update reparations set status = ?, type = ?, reparation = ?, price = ?, users_id = ? where id = ?`,
+const updateById = (reparationId, { status, type_rep, reparation, price, users_id }) => {
+    return db.query(` update reparations set status = ?, type_rep = ?, reparation = ?, price = ?, users_id = ? where id = ?`,
 
-        [status, type, reparation, price, users_id, reparationId]
+        [status, type_rep, reparation, price, users_id, reparationId]
     )
 }
 
 
-module.exports = { create, getById, getAll, mechanicForReparation, filterByUser, deleteById, updateById }
+module.exports = { create, getById, getAll, mechanicForReparation, deleteById, updateById, filterByUser }
