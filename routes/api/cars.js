@@ -60,6 +60,7 @@ router.put('/:carId', checkAdmin, async (req, res) => {
     try {
         const [car] = await updateById(parseInt(carId), req.body);
         res.json(car[0])
+
     } catch (error) {
         res.json({ fatal: error.message });
     }
